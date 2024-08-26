@@ -51,6 +51,11 @@ connection.connect((err) => {
     console.log('DB server connected successfully');
 });
 
+// Root route to redirect to register page
+app.get('/', (request, response) => {
+    response.redirect('/register');
+});
+
 // Routes
 app.get('/register', (request, response) => {
     response.sendFile(path.join(__dirname, 'register.html'));
