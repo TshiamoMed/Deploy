@@ -5,6 +5,7 @@ const bcryptjs = require('bcryptjs');
 const bodyParser = require('body-parser');
 const path = require('path');
 const { check, validationResult } = require('express-validator');
+require('dotenv').config();
 
 // Initialize
 const app = express();
@@ -17,16 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Configure session
-app.use(session({
-    secret: 'your_secret_key', // Change this to a real secret key
-    resave: false,
-    saveUninitialized: true
-}));
-
-// Connection
-
-require('dotenv').config();
-
 const MySQLStore = require('express-mysql-session')(session);
 const sessionStore = new MySQLStore({
     host: process.env.DB_HOST,
@@ -37,11 +28,20 @@ const sessionStore = new MySQLStore({
 });
 
 app.use(session({
-    secret: 'secret_key',
+    secret: 'your_secret_key', // Change this to a real secret key
     store: sessionStore,
     resave: false,
     saveUninitialized: true
 }));
+
+// MySQL connection
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST || 'localhost', 
+    port: process.env.DB_PORT || 3306,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+});
 
 connection.connect((err) => {
     if (err) {
