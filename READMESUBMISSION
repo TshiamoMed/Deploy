@@ -1,0 +1,32 @@
+# Expense Tracker Application
+
+## Overview
+
+The Expense Tracker application is a full-stack application designed to help users manage their expenses. It features user registration and login functionality, expense tracking, and a user-friendly interface. The application uses Node.js with Express for the backend, MySQL for the database, and HTML, CSS, and JavaScript for the frontend.
+
+## Deployment
+
+### Deployed Application
+
+The application has been deployed and is accessible at the following link:
+[Expense Tracker Application](https://xt-kbhzfacg.b4a.run/register)
+
+### Deployment Strategies and Hosting Platforms
+
+**Deployment Strategies:**
+1. **Traditional Server Hosting:** Deploy on a dedicated or shared server, managing server infrastructure and software manually.
+2. **Cloud Hosting:** Utilize cloud services like AWS, Google Cloud Platform, or DigitalOcean for scalable and flexible hosting solutions.
+3. **Serverless Architecture:** Deploy using serverless platforms like AWS Lambda or Google Cloud Functions for automatic scaling and pay-as-you-go pricing.
+4. **Containerization:** Use Docker to containerize your application for consistent environments across development and production.
+
+**Popular Hosting Platforms:**
+- **AWS (Amazon Web Services):** Offers a range of services for deploying, managing, and scaling applications.
+- **Google Cloud Platform (GCP):** Provides cloud computing services including app hosting and data storage.
+- **Heroku:** A platform-as-a-service (PaaS) that simplifies application deployment and scaling.
+- **DigitalOcean:** Provides cloud infrastructure services with simplicity and cost-effectiveness.
+
+**Pros and Cons:**
+- **Traditional Server Hosting:** Provides full control but requires more management.
+- **Cloud Hosting:** Offers scalability and flexibility but can be complex to manage.
+- **Serverless Architecture:** Scales automatically but can lead to higher costs with unpredictable usage.
+- **Containerization:** Ensures consistency across environments but requires knowledge of Docker.
