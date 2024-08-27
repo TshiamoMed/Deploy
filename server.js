@@ -1,5 +1,5 @@
-const express = require('express');
 const mysql = require('mysql2');
+const express = require('express');
 const session = require('express-session');
 const bcryptjs = require('bcryptjs');
 const bodyParser = require('body-parser');
@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const MySQLStore = require('express-mysql-session')(session);
 const sessionStore = new MySQLStore({
     host: process.env.DB_HOST,
-    port: process.env.DB_PORT || 3306,
+    port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
@@ -36,11 +36,11 @@ app.use(session({
 
 // MySQL connection
 const connection = mysql.createConnection({
-    host: process.env.DB_HOST || '127.0.0.1', 
-    port: process.env.DB_PORT || 3306,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME || 'week5'
+    database: process.env.DB_NAME
 });
 
 connection.connect((err) => {
@@ -49,6 +49,25 @@ connection.connect((err) => {
         return;
     }
     console.log('DB server connected successfully');
+});
+
+// Create the 'users' table if it doesn't exist
+const createTableQuery = `
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+`;
+
+connection.query(createTableQuery, (err, results) => {
+    if (err) {
+        console.error('Error creating table:', err.stack);
+        return;
+    }
+    console.log('Table created or already exists');
 });
 
 // Root route to redirect to register page
